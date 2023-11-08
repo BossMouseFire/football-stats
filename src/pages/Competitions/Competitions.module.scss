@@ -28,9 +28,24 @@ $bg-img: url('../../assets/imgs/background.png');
     }
   }
 
+  .empty {
+    text-align: center;
+    font-size: 18px;
+    color: black;
+  }
+
+  .searchBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
   .blockCompetitions {
     display: flex;
     flex-direction: column;
-    padding: 0 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
   }
 }
