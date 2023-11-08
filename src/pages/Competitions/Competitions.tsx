@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/useAppSelector';
 import { useAppSelector } from '../../hooks/useApDispatch';
-import { competitionSelector } from '../../store/competition/competitionSelector';
-import { fetchCompetitions } from '../../store/competition/competitionCreator';
+import { competitionsSelector } from '../../store/competitions/competitionsSelector';
+import { fetchCompetitions } from '../../store/competitions/competitionsCreator';
 import {
     CompetitionList,
     MainCompetitions,
@@ -14,7 +14,7 @@ import { Spin } from 'antd';
 const CompetitionsPage = () => {
     const dispatch = useAppDispatch();
     const { filterCompetitions, isLoading } =
-        useAppSelector(competitionSelector);
+        useAppSelector(competitionsSelector);
 
     useEffect(() => {
         dispatch(fetchCompetitions());

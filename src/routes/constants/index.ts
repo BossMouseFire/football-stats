@@ -1,3 +1,4 @@
 export const routes = {
-    competitions: '/competitions',
+    competitions: '/',
+    competition: '/competition/:id',
 };
