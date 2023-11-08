@@ -9,6 +9,7 @@ import {
     SearchCompetition,
 } from '../../components/';
 import styles from './Competitions.module.scss';
+import { Spin } from 'antd';
 
 const CompetitionsPage = () => {
     const dispatch = useAppDispatch();
@@ -30,6 +31,10 @@ const CompetitionsPage = () => {
                 <div className={styles.searchBlock}>
                     <SearchCompetition />
                 </div>
+                {isLoading && <Spin />}
+                {!filterCompetitions.length && (
+                    <div className={styles.empty}>Ничего не найдено</div>
+                )}
                 {filterCompetitions.length && (
                     <CompetitionList competitionList={filterCompetitions} />
                 )}
