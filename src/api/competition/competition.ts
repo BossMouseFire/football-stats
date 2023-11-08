@@ -1,4 +1,4 @@
-import { api } from '../config';
+import api from '../config';
 import { CompetitionsResponse } from './types';
 import { Competition } from '../../model/Competition';
 

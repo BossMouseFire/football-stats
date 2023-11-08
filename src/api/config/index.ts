@@ -50,4 +50,6 @@ class ApiClient implements IApiClient {
     }
 }
 
-export const api = new ApiClient(axiosConfig);
+const api = new ApiClient(axiosConfig);
+
+export default api;
