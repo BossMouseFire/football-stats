@@ -1,6 +1,15 @@
 import React from 'react';
-function App() {
-    return <div>Hello World</div>;
-}
+import { Provider } from 'react-redux';
+import { store } from './store';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Root } from './routes/Root';
+
+const App = () => (
+    <Provider store={store()}>
+        <Router>
+            <Root />
+        </Router>
+    </Provider>
+);
 
 export default App;
