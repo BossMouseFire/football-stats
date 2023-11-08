@@ -3,12 +3,17 @@ import { useAppDispatch } from '../../hooks/useAppSelector';
 import { useAppSelector } from '../../hooks/useApDispatch';
 import { competitionSelector } from '../../store/competition/competitionSelector';
 import { fetchCompetitions } from '../../store/competition/competitionCreator';
-import { CompetitionList, MainCompetitions } from '../../components/';
+import {
+    CompetitionList,
+    MainCompetitions,
+    SearchCompetition,
+} from '../../components/';
 import styles from './Competitions.module.scss';
 
 const CompetitionsPage = () => {
     const dispatch = useAppDispatch();
-    const { competitions, isLoading } = useAppSelector(competitionSelector);
+    const { filterCompetitions, isLoading } =
+        useAppSelector(competitionSelector);
 
     useEffect(() => {
         dispatch(fetchCompetitions());
@@ -22,8 +27,11 @@ const CompetitionsPage = () => {
             </div>
             <div className={styles.blockCompetitions}>
                 <MainCompetitions />
-                {competitions.length && (
-                    <CompetitionList competitionList={competitions} />
+                <div className={styles.searchBlock}>
+                    <SearchCompetition />
+                </div>
+                {filterCompetitions.length && (
+                    <CompetitionList competitionList={filterCompetitions} />
                 )}
             </div>
         </div>

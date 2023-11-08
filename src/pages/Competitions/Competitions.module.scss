@@ -28,6 +28,13 @@ $bg-img: url('../../assets/imgs/background.png');
     }
   }
 
+  .searchBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
   .blockCompetitions {
     display: flex;
     flex-direction: column;
