@@ -1,4 +1,4 @@
-export const competitionsMocks = [
+export const competitionsMock = [
     {
         id: 2013,
         area: {

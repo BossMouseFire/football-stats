@@ -1,52 +1,153 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Competition } from '../../model/Competition';
-import { fetchCompetitions } from './competitionCreator';
+import {
+    fetchCompetition,
+    fetchCompetitionStandings,
+    fetchCompetitionMatches,
+    fetchCompetitionTeams,
+} from './competitionCreator';
+import { Standing } from '../../model/Standing';
+import { Match } from '../../model/Match';
+import { Team } from '../../model/Team';
+import { CompetitionStandings } from '../../api/competition/types';
+import { ErrorData } from '../../errors/ErrorData';
+import { Dayjs } from 'dayjs';
 
-interface InitialStateFeedback {
-    isLoading: boolean;
-    competitions: Competition[];
-    filterCompetitions: Competition[];
-    filterName: string;
+interface InitialStateCompetitions {
+    isLoadingCompetition: boolean;
+    isLoadingCompetitionStanding: boolean;
+    isLoadingCompetitionMatches: boolean;
+    isLoadingCompetitionTeams: boolean;
+
+    errorCompetition: ErrorData | undefined;
+    errorCompetitionStanding: ErrorData | undefined;
+    errorCompetitionMatches: ErrorData | undefined;
+    errorCompetitionTeams: ErrorData | undefined;
+
+    competition: Competition | null;
+    standings: Standing[];
+    matches: Match[];
+    teams: Team[];
+
+    dateFrom: Dayjs | null;
+    dateTo: Dayjs | null;
+    season?: string;
 }
 
-const initialState: InitialStateFeedback = {
-    isLoading: false,
-    competitions: [],
-    filterCompetitions: [],
-    filterName: '',
+const initialState: InitialStateCompetitions = {
+    isLoadingCompetition: false,
+    isLoadingCompetitionStanding: false,
+    isLoadingCompetitionMatches: false,
+    isLoadingCompetitionTeams: false,
+
+    errorCompetition: undefined,
+    errorCompetitionStanding: undefined,
+    errorCompetitionMatches: undefined,
+    errorCompetitionTeams: undefined,
+
+    competition: null,
+    standings: [],
+    matches: [],
+    teams: [],
+
+    dateFrom: null,
+    dateTo: null,
+    season: undefined,
 };
 
 export const competitionSlice = createSlice({
     name: 'competition',
     initialState,
     reducers: {
-        fetchCompleted: (state) => {
-            state.isLoading = false;
+        fetchCompetitionCompleted: (state) => {
+            state.isLoadingCompetition = false;
+            state.errorCompetition = undefined;
         },
-        setFilter: (state, action: PayloadAction<string>) => {
-            state.filterName = action.payload;
-
-            if (!action.payload) {
-                state.filterCompetitions = state.competitions;
-            } else {
-                const filterNameLower = state.filterName.toLowerCase();
-                state.filterCompetitions = state.competitions.filter(
-                    (item) =>
-                        item.name.toLowerCase().indexOf(filterNameLower) !== -1,
-                );
-            }
+        fetchCompetitionStandingCompleted: (state) => {
+            state.isLoadingCompetitionStanding = false;
+            state.errorCompetitionStanding = undefined;
+        },
+        fetchCompetitionMatchesCompleted: (state) => {
+            state.isLoadingCompetitionMatches = false;
+            state.errorCompetitionMatches = undefined;
+        },
+        fetchCompetitionTeamsCompleted: (state) => {
+            state.isLoadingCompetitionTeams = false;
+            state.errorCompetitionTeams = undefined;
+        },
+        setDateFrom: (state, action: PayloadAction<Dayjs | null>) => {
+            state.dateFrom = action.payload;
+        },
+        setDateTo: (state, action: PayloadAction<Dayjs | null>) => {
+            state.dateTo = action.payload;
+        },
+        setSeason: (state, action: PayloadAction<string | undefined>) => {
+            state.season = action.payload;
         },
     },
     extraReducers: {
-        [fetchCompetitions.pending.type]: (state) => {
-            state.isLoading = true;
+        [fetchCompetition.pending.type]: (state) => {
+            state.isLoadingCompetition = true;
         },
-        [fetchCompetitions.fulfilled.type]: (
+        [fetchCompetition.fulfilled.type]: (
             state,
-            action: PayloadAction<Competition[]>,
+            action: PayloadAction<Competition>,
         ) => {
-            state.competitions = action.payload;
-            state.filterCompetitions = action.payload;
+            state.competition = action.payload;
+        },
+        [fetchCompetition.rejected.type]: (
+            state,
+            action: PayloadAction<ErrorData>,
+        ) => {
+            state.errorCompetition = action.payload;
+        },
+        [fetchCompetitionStandings.pending.type]: (state) => {
+            state.isLoadingCompetitionStanding = true;
+            state.isLoadingCompetition = true;
+        },
+        [fetchCompetitionStandings.fulfilled.type]: (
+            state,
+            action: PayloadAction<CompetitionStandings>,
+        ) => {
+            state.standings = action.payload.standings;
+            state.competition = action.payload.competition;
+        },
+        [fetchCompetitionStandings.rejected.type]: (
+            state,
+            action: PayloadAction<ErrorData>,
+        ) => {
+            state.errorCompetition = action.payload;
+            state.errorCompetitionStanding = action.payload;
+        },
+        [fetchCompetitionMatches.pending.type]: (state) => {
+            state.isLoadingCompetitionMatches = true;
+        },
+        [fetchCompetitionMatches.fulfilled.type]: (
+            state,
+            action: PayloadAction<Match[]>,
+        ) => {
+            state.matches = action.payload;
+        },
+        [fetchCompetitionMatches.rejected.type]: (
+            state,
+            action: PayloadAction<ErrorData>,
+        ) => {
+            state.errorCompetitionMatches = action.payload;
+        },
+        [fetchCompetitionTeams.pending.type]: (state) => {
+            state.isLoadingCompetitionTeams = true;
+        },
+        [fetchCompetitionTeams.fulfilled.type]: (
+            state,
+            action: PayloadAction<Team[]>,
+        ) => {
+            state.teams = action.payload;
+        },
+        [fetchCompetitionTeams.rejected.type]: (
+            state,
+            action: PayloadAction<ErrorData>,
+        ) => {
+            state.errorCompetitionTeams = action.payload;
         },
     },
 });

@@ -3,13 +3,13 @@ import { AreaDto } from './AreaDto';
 
 export interface CompetitionDto {
     id: number;
-    area: AreaDto;
+    area?: AreaDto | null;
     name: string;
-    code: string;
-    type: string;
+    code: string | null;
+    type: string | null;
     emblem: string;
-    plan: string;
+    plan?: string | null;
     currentSeason: SeasonDto;
-    numberOfAvailableSeasons: number;
-    lastUpdated: string;
+    numberOfAvailableSeasons?: number | null;
+    lastUpdated?: string | null;
 }

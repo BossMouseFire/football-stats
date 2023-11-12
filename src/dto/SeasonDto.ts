@@ -1,7 +1,9 @@
+import { TeamDto } from './TeamDto';
+
 export interface SeasonDto {
     id: number;
-    startDate: string;
-    endDate: string;
-    currentMatchday: number;
-    winner: null | string;
+    startDate: string | null;
+    endDate: string | null;
+    currentMatchday: number | null;
+    winner: null | TeamDto;
 }

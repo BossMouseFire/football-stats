@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch } from '../../hooks/useAppSelector';
 import { useAppSelector } from '../../hooks/useApDispatch';
-import { competitionSelector } from '../../store/competition/competitionSelector';
-import { fetchCompetitions } from '../../store/competition/competitionCreator';
+import { competitionsSelector } from '../../store/competitions/competitionsSelector';
+import { fetchCompetitions } from '../../store/competitions/competitionsCreator';
 import {
     CompetitionList,
     MainCompetitions,
@@ -10,16 +10,20 @@ import {
 } from '../../components/';
 import styles from './Competitions.module.scss';
 import { Spin } from 'antd';
+import { ErrorBlock } from '../../components/ErrorBlock/ErrorBlock';
 
 const CompetitionsPage = () => {
     const dispatch = useAppDispatch();
-    const { filterCompetitions, isLoading } =
-        useAppSelector(competitionSelector);
+    const { filterCompetitions, isLoading, error } =
+        useAppSelector(competitionsSelector);
 
     useEffect(() => {
         dispatch(fetchCompetitions());
     }, []);
 
+    if (error) {
+        return <ErrorBlock error={error} />;
+    }
     return (
         <div className={styles.pageLeagues}>
             <div className={styles.aboutSite}>

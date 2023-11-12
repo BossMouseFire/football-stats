@@ -1,0 +1,31 @@
+.league {
+  display: flex;
+  flex-direction: column;
+
+  .leagueName {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    img {
+      width: 70px;
+    }
+
+    span {
+      font-size: 30px;
+      margin-right: 20px;
+    }
+  }
+
+  .basicInfo{
+    margin-top: 20px;
+    div{
+      font-size: 18px;
+      line-height: 30px;
+      span:nth-child(1){
+        color: #565555;
+        margin-right: 1vw;
+      }
+    }
+  }
+}

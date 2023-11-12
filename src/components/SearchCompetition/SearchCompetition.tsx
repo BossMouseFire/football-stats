@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { Input } from 'antd';
 import { useAppDispatch } from '../../hooks/useAppSelector';
-import competitionAction from '../../store/competition/competitionAction';
+import competitionsAction from '../../store/competitions/competitionsAction';
 
 import styles from './SearchCompetiton.module.scss';
 
@@ -18,6 +18,6 @@ export const SearchCompetition = () => {
 
     function handleSearchCompetition(event: ChangeEvent<HTMLInputElement>) {
         const name = event.target.value;
-        dispatch(competitionAction.setFilter(name));
+        dispatch(competitionsAction.setFilter(name));
     }
 };

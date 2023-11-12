@@ -1,17 +1,20 @@
 import { SeasonDto } from '../dto/SeasonDto';
+import { Team } from './Team';
 
 export class Season {
     id: number;
-    startDate: string;
-    endDate: string;
-    currentMatchday: number;
-    winner: null | string;
+    startDate: string | null;
+    endDate: string | null;
+    currentMatchday: number | null;
+    winner: null | Team = null;
 
     constructor(dto: SeasonDto) {
         this.id = dto.id;
         this.startDate = dto.startDate;
         this.endDate = dto.endDate;
         this.currentMatchday = dto.currentMatchday;
-        this.winner = dto.winner;
+        if (dto.winner) {
+            this.winner = new Team(dto.winner);
+        }
     }
 }
