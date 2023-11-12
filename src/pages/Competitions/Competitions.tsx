@@ -10,16 +10,20 @@ import {
 } from '../../components/';
 import styles from './Competitions.module.scss';
 import { Spin } from 'antd';
+import { ErrorBlock } from '../../components/ErrorBlock/ErrorBlock';
 
 const CompetitionsPage = () => {
     const dispatch = useAppDispatch();
-    const { filterCompetitions, isLoading } =
+    const { filterCompetitions, isLoading, error } =
         useAppSelector(competitionsSelector);
 
     useEffect(() => {
         dispatch(fetchCompetitions());
     }, []);
 
+    if (error) {
+        return <ErrorBlock error={error} />;
+    }
     return (
         <div className={styles.pageLeagues}>
             <div className={styles.aboutSite}>

@@ -2,15 +2,15 @@ import { TeamDto } from '../dto/TeamDto';
 
 export class Team {
     id: number;
-    name: string;
-    shortName: string;
-    tla: string;
-    crest: string;
-    address: string;
-    website: string;
-    founded: string;
-    clubColors: string;
-    venue: string;
+    name: string | null;
+    shortName: string | null;
+    tla: string | null;
+    crest: string | null;
+    address: string | null;
+    website: string | null;
+    founded: number | null;
+    clubColors: string | null;
+    venue: string | null;
 
     constructor(dto: TeamDto) {
         this.id = dto.id;

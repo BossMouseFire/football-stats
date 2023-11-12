@@ -4,12 +4,14 @@ import { store } from './store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Root } from './routes/Root';
 
-const App = () => (
-    <Provider store={store()}>
-        <Router>
-            <Root />
-        </Router>
-    </Provider>
-);
+const App = () => {
+    return (
+        <Provider store={store()}>
+            <Router>
+                <Root />
+            </Router>
+        </Provider>
+    );
+};
 
 export default App;

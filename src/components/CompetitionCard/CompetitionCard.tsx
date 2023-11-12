@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CompetitionCardProps } from './CompetitionCardProps';
 import styles from './CompetitionCard.module.scss';
 import { getDateToString } from '../../utils/date';
+import { dateCompetition } from '../../utils/dateCompetition';
 
 export const CompetitionCard: React.FC<CompetitionCardProps> = ({
     competition,
@@ -27,7 +28,10 @@ export const CompetitionCard: React.FC<CompetitionCardProps> = ({
         <div className={styles.leagueCard}>
             <div className={styles.titleLeague}>
                 <div>
-                    <img src={competition.emblem} alt={competition.name} />
+                    <img
+                        src={competition.emblem || ''}
+                        alt={competition.name || ''}
+                    />
                 </div>
                 <span>{competition.name}</span>
             </div>
@@ -37,8 +41,10 @@ export const CompetitionCard: React.FC<CompetitionCardProps> = ({
                     {currentSeasonEndDate?.getFullYear()}
                 </div>
                 <div>
-                    {getDateToString(currentSeasonStartDate)}-
-                    {getDateToString(currentSeasonEndDate)}
+                    {dateCompetition(
+                        competition.currentSeason.startDate || '',
+                        competition.currentSeason.endDate || '',
+                    )}
                 </div>
             </div>
             <div className={styles.descriptionLeague}>

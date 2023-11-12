@@ -1,0 +1,51 @@
+.match {
+  display: flex;
+  align-items: center;
+  .status {
+    margin-right: 15px;
+  }
+  .date {
+    margin-right: 15px;
+  }
+  .team {
+    display: flex;
+    align-items: center;
+    img {
+      width: 35px;
+      height: 35px;
+    }
+
+    span {
+      margin-right: 10px;
+    }
+  }
+
+  .winnerTeam {
+    color: #608D2E;
+  }
+
+
+  .score {
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+.matchListBlock {
+  display: flex;
+  flex-direction: column;
+
+  .matchMargin {
+    margin-top: 15px;
+  }
+
+  .dateRange {
+    width: 300px;
+    margin-bottom: 10px;
+  }
+
+  .pagination {
+    margin-top: 20px;
+  }
+}

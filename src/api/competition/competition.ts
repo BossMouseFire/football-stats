@@ -3,6 +3,7 @@ import {
     CompetitionMatchesParams,
     CompetitionMatchesResponse,
     CompetitionsResponse,
+    CompetitionStandings,
     CompetitionStandingsResponse,
     CompetitionTeamsResponse,
 } from './types';
@@ -15,24 +16,23 @@ import { Team } from '../../model/Team';
 export class CompetitionApi {
     public static async getCompetitions(): Promise<Competition[]> {
         const data = await api.get<CompetitionsResponse>('/competitions');
-
         if (data) {
             return data.competitions.map((item) => new Competition(item));
         }
         return [];
     }
 
-    public static async getCompetition(id: number): Promise<Competition> {
-        const data = await api.get<CompetitionDto>(`/competition/${id}`);
+    public static async getCompetition(id: string): Promise<Competition> {
+        const data = await api.get<CompetitionDto>(`/competitions/${id}`);
         return new Competition(data);
     }
 
     public static async getCompetitionStanding(
-        id: number,
+        id: string,
         season?: string,
-    ): Promise<Standing[]> {
+    ): Promise<CompetitionStandings | undefined> {
         const data = await api.get<CompetitionStandingsResponse>(
-            `/competition/${id}/standings`,
+            `/competitions/${id}/standings`,
             {
                 params: {
                     season,
@@ -41,17 +41,24 @@ export class CompetitionApi {
         );
 
         if (data) {
-            return data.standings.map((item) => new Standing(item));
+            const competition = new Competition({
+                currentSeason: data.season,
+                ...data.competition,
+            });
+            return {
+                standings: data.standings.map((item) => new Standing(item)),
+                competition,
+            };
         }
-        return [];
+        return undefined;
     }
 
     public static async getCompetitionMatches(
-        id: number,
+        id: string,
         params?: CompetitionMatchesParams,
     ): Promise<Match[]> {
         const data = await api.get<CompetitionMatchesResponse>(
-            `/competition/${id}/matches`,
+            `/competitions/${id}/matches`,
             { params },
         );
 
@@ -62,11 +69,11 @@ export class CompetitionApi {
     }
 
     public static async getCompetitionTeams(
-        id: number,
+        id: string,
         season?: string,
     ): Promise<Team[]> {
         const data = await api.get<CompetitionTeamsResponse>(
-            `/competition/${id}/teams`,
+            `/competitions/${id}/teams`,
             {
                 params: {
                     season,

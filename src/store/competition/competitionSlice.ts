@@ -9,6 +9,9 @@ import {
 import { Standing } from '../../model/Standing';
 import { Match } from '../../model/Match';
 import { Team } from '../../model/Team';
+import { CompetitionStandings } from '../../api/competition/types';
+import { ErrorData } from '../../errors/ErrorData';
+import { Dayjs } from 'dayjs';
 
 interface InitialStateCompetitions {
     isLoadingCompetition: boolean;
@@ -16,13 +19,18 @@ interface InitialStateCompetitions {
     isLoadingCompetitionMatches: boolean;
     isLoadingCompetitionTeams: boolean;
 
+    errorCompetition: ErrorData | undefined;
+    errorCompetitionStanding: ErrorData | undefined;
+    errorCompetitionMatches: ErrorData | undefined;
+    errorCompetitionTeams: ErrorData | undefined;
+
     competition: Competition | null;
     standings: Standing[];
     matches: Match[];
     teams: Team[];
 
-    dateFrom?: string;
-    dateTo?: string;
+    dateFrom: Dayjs | null;
+    dateTo: Dayjs | null;
     season?: string;
 }
 
@@ -32,13 +40,18 @@ const initialState: InitialStateCompetitions = {
     isLoadingCompetitionMatches: false,
     isLoadingCompetitionTeams: false,
 
+    errorCompetition: undefined,
+    errorCompetitionStanding: undefined,
+    errorCompetitionMatches: undefined,
+    errorCompetitionTeams: undefined,
+
     competition: null,
     standings: [],
     matches: [],
     teams: [],
 
-    dateFrom: undefined,
-    dateTo: undefined,
+    dateFrom: null,
+    dateTo: null,
     season: undefined,
 };
 
@@ -48,20 +61,24 @@ export const competitionSlice = createSlice({
     reducers: {
         fetchCompetitionCompleted: (state) => {
             state.isLoadingCompetition = false;
+            state.errorCompetition = undefined;
         },
         fetchCompetitionStandingCompleted: (state) => {
             state.isLoadingCompetitionStanding = false;
+            state.errorCompetitionStanding = undefined;
         },
         fetchCompetitionMatchesCompleted: (state) => {
             state.isLoadingCompetitionMatches = false;
+            state.errorCompetitionMatches = undefined;
         },
         fetchCompetitionTeamsCompleted: (state) => {
             state.isLoadingCompetitionTeams = false;
+            state.errorCompetitionTeams = undefined;
         },
-        setDateFrom: (state, action: PayloadAction<string | undefined>) => {
+        setDateFrom: (state, action: PayloadAction<Dayjs | null>) => {
             state.dateFrom = action.payload;
         },
-        setDateTo: (state, action: PayloadAction<string | undefined>) => {
+        setDateTo: (state, action: PayloadAction<Dayjs | null>) => {
             state.dateTo = action.payload;
         },
         setSeason: (state, action: PayloadAction<string | undefined>) => {
@@ -78,14 +95,29 @@ export const competitionSlice = createSlice({
         ) => {
             state.competition = action.payload;
         },
+        [fetchCompetition.rejected.type]: (
+            state,
+            action: PayloadAction<ErrorData>,
+        ) => {
+            state.errorCompetition = action.payload;
+        },
         [fetchCompetitionStandings.pending.type]: (state) => {
             state.isLoadingCompetitionStanding = true;
+            state.isLoadingCompetition = true;
         },
         [fetchCompetitionStandings.fulfilled.type]: (
             state,
-            action: PayloadAction<Standing[]>,
+            action: PayloadAction<CompetitionStandings>,
         ) => {
-            state.standings = action.payload;
+            state.standings = action.payload.standings;
+            state.competition = action.payload.competition;
+        },
+        [fetchCompetitionStandings.rejected.type]: (
+            state,
+            action: PayloadAction<ErrorData>,
+        ) => {
+            state.errorCompetition = action.payload;
+            state.errorCompetitionStanding = action.payload;
         },
         [fetchCompetitionMatches.pending.type]: (state) => {
             state.isLoadingCompetitionMatches = true;
@@ -96,6 +128,12 @@ export const competitionSlice = createSlice({
         ) => {
             state.matches = action.payload;
         },
+        [fetchCompetitionMatches.rejected.type]: (
+            state,
+            action: PayloadAction<ErrorData>,
+        ) => {
+            state.errorCompetitionMatches = action.payload;
+        },
         [fetchCompetitionTeams.pending.type]: (state) => {
             state.isLoadingCompetitionTeams = true;
         },
@@ -104,6 +142,12 @@ export const competitionSlice = createSlice({
             action: PayloadAction<Team[]>,
         ) => {
             state.teams = action.payload;
+        },
+        [fetchCompetitionTeams.rejected.type]: (
+            state,
+            action: PayloadAction<ErrorData>,
+        ) => {
+            state.errorCompetitionTeams = action.payload;
         },
     },
 });

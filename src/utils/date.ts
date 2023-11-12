@@ -1,3 +1,12 @@
+export const getDate = (dateToStr: string) => {
+    if (!isDateValid(dateToStr)) {
+        return '';
+    }
+
+    const date = new Date(dateToStr);
+    return getDateToString(date);
+};
+
 export const getDateToString = (date?: Date) => {
     if (date) {
         const dateNum = date.getDate();
@@ -10,3 +19,8 @@ export const getDateToString = (date?: Date) => {
     }
     return '';
 };
+
+export function isDateValid(dateToStr: string) {
+    const timestamp = Date.parse(dateToStr);
+    return !isNaN(timestamp);
+}

@@ -1,14 +1,16 @@
 import { Time } from './Time';
-import { ScoreDto } from '../dto/ScoreDto';
+import { ScoreDto, Winner } from '../dto/ScoreDto';
 
 export class Score {
-    winner: string;
+    duration: string | null;
+    winner: keyof typeof Winner | null;
     fullTime: Time;
-    penalties: Time;
+    halfTime: Time;
 
     constructor(dto: ScoreDto) {
+        this.duration = dto.duration;
         this.winner = dto.winner;
         this.fullTime = new Time(dto.fullTime);
-        this.penalties = new Time(dto.penalties);
+        this.halfTime = new Time(dto.halfTime);
     }
 }

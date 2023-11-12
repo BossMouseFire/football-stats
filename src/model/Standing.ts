@@ -1,9 +1,9 @@
-import { StandingDto } from '../dto/StandingDto';
+import { StandingDto, StandingType } from '../dto/StandingDto';
 import { TableTeamStat } from './TableTeamStat';
 
 export class Standing {
     stage: string;
-    type: string;
+    type: keyof typeof StandingType;
     table: TableTeamStat[];
 
     constructor(dto: StandingDto) {

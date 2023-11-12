@@ -1,11 +1,11 @@
 import { TimeDto } from '../dto/TimeDto';
 
 export class Time {
-    homeTeam: number | null;
-    awayTeam: number | null;
+    home: number | null;
+    away: number | null;
 
     constructor(dto: TimeDto) {
-        this.homeTeam = dto.homeTeam;
-        this.awayTeam = dto.awayTeam;
+        this.home = dto.home;
+        this.away = dto.away;
     }
 }

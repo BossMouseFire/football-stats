@@ -2,3 +2,8 @@ export { MainCompetitions } from './MainCompetitions/MainCompetitions';
 export { CompetitionList } from './CompetitionList/CompetitionList';
 export { SearchCompetition } from './SearchCompetition/SearchCompetition';
 export { Navbar } from './Navbar/Navbar';
+export { TableStanding } from './TableStanding/TableStanding';
+export { LeagueInfo } from './LeagueInfo/LeagueInfo';
+export { CompetitionTabs } from './CompetitionTabs/CompetitionTabs';
+export { TablesStandings } from './TablesStandings/TablesStandings';
+export { TeamList } from './TeamList/TeamList';

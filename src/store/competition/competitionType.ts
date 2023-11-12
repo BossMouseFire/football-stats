@@ -1,20 +1,16 @@
 export interface CompetitionStandingProps {
-    id: number;
+    id: string;
     season?: string;
 }
 
 export interface CompetitionTeamsProps {
-    id: number;
+    id: string;
     season?: string;
 }
 
 export interface CompetitionMatchesProps {
-    id: number;
+    id: string;
     dateFrom?: string;
     dateTo?: string;
-    season?: string;
-}
-
-export interface SetSeasonProps {
     season?: string;
 }

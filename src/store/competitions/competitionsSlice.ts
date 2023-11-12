@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Competition } from '../../model/Competition';
 import { fetchCompetitions } from './competitionsCreator';
+import { ErrorData } from '../../errors/ErrorData';
+import { fetchCompetitionStandings } from '../competition/competitionCreator';
 
 interface InitialStateCompetitions {
     isLoading: boolean;
     competitions: Competition[];
     filterCompetitions: Competition[];
     filterName: string;
+    error: ErrorData | undefined;
 }
 
 const initialState: InitialStateCompetitions = {
@@ -14,6 +17,7 @@ const initialState: InitialStateCompetitions = {
     competitions: [],
     filterCompetitions: [],
     filterName: '',
+    error: undefined,
 };
 
 export const competitionsSlice = createSlice({
@@ -22,6 +26,7 @@ export const competitionsSlice = createSlice({
     reducers: {
         fetchCompleted: (state) => {
             state.isLoading = false;
+            state.error = undefined;
         },
         setFilter: (state, action: PayloadAction<string>) => {
             state.filterName = action.payload;
@@ -32,7 +37,8 @@ export const competitionsSlice = createSlice({
                 const filterNameLower = state.filterName.toLowerCase();
                 state.filterCompetitions = state.competitions.filter(
                     (item) =>
-                        item.name.toLowerCase().indexOf(filterNameLower) !== -1,
+                        item?.name?.toLowerCase().indexOf(filterNameLower) !==
+                        -1,
                 );
             }
         },
@@ -47,6 +53,12 @@ export const competitionsSlice = createSlice({
         ) => {
             state.competitions = action.payload;
             state.filterCompetitions = action.payload;
+        },
+        [fetchCompetitions.rejected.type]: (
+            state,
+            action: PayloadAction<ErrorData>,
+        ) => {
+            state.error = action.payload;
         },
     },
 });

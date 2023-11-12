@@ -1,4 +1,4 @@
 export interface TimeDto {
-    homeTeam: number | null;
-    awayTeam: number | null;
+    home: number | null;
+    away: number | null;
 }
