@@ -1,9 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, PreloadedState } from '@reduxjs/toolkit';
 import { rootReducer } from './rootReducer';
 
-const store = () => {
+const store = (preloadedState?: PreloadedState<RootState>) => {
     return configureStore({
         reducer: rootReducer,
+        preloadedState,
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
                 serializableCheck: false,
