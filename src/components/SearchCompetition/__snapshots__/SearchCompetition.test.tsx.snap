@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchCompetition renders correctly 1`] = `
+<input
+  className="ant-input css-dev-only-do-not-override-2i2tap search"
+  disabled={false}
+  onBlur={[Function]}
+  onChange={[Function]}
+  onCompositionEnd={[Function]}
+  onCompositionStart={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  placeholder="Введите название соревнования"
+  style={Object {}}
+  type="text"
+  value=""
+/>
+`;

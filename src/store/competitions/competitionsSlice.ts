@@ -2,15 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Competition } from '../../model/Competition';
 import { fetchCompetitions } from './competitionsCreator';
 import { ErrorData } from '../../errors/ErrorData';
-import { fetchCompetitionStandings } from '../competition/competitionCreator';
-
-interface InitialStateCompetitions {
-    isLoading: boolean;
-    competitions: Competition[];
-    filterCompetitions: Competition[];
-    filterName: string;
-    error: ErrorData | undefined;
-}
+import { InitialStateCompetitions } from './competitionsType';
 
 const initialState: InitialStateCompetitions = {
     isLoading: false,

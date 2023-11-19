@@ -7,7 +7,9 @@ export const Navbar = () => {
         <div className={styles.navbar}>
             <img src={Ball} alt='ball' />
             <span>
-                <a href={'/'}>FootSTAT</a>
+                <a id='link-main-page' href={'/'}>
+                    FootSTAT
+                </a>
             </span>
         </div>
     );

@@ -6,35 +6,14 @@ import {
     fetchCompetitionMatches,
     fetchCompetitionTeams,
 } from './competitionCreator';
-import { Standing } from '../../model/Standing';
 import { Match } from '../../model/Match';
 import { Team } from '../../model/Team';
 import { CompetitionStandings } from '../../api/competition/types';
 import { ErrorData } from '../../errors/ErrorData';
 import { Dayjs } from 'dayjs';
+import { InitialStateCompetition } from './competitionType';
 
-interface InitialStateCompetitions {
-    isLoadingCompetition: boolean;
-    isLoadingCompetitionStanding: boolean;
-    isLoadingCompetitionMatches: boolean;
-    isLoadingCompetitionTeams: boolean;
-
-    errorCompetition: ErrorData | undefined;
-    errorCompetitionStanding: ErrorData | undefined;
-    errorCompetitionMatches: ErrorData | undefined;
-    errorCompetitionTeams: ErrorData | undefined;
-
-    competition: Competition | null;
-    standings: Standing[];
-    matches: Match[];
-    teams: Team[];
-
-    dateFrom: Dayjs | null;
-    dateTo: Dayjs | null;
-    season?: string;
-}
-
-const initialState: InitialStateCompetitions = {
+const initialState: InitialStateCompetition = {
     isLoadingCompetition: false,
     isLoadingCompetitionStanding: false,
     isLoadingCompetitionMatches: false,
