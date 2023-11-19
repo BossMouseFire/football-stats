@@ -1,0 +1,23 @@
+.navbar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  background: #4e7934;
+  width: 100vw;
+  height: 60px;
+  color: white;
+  padding: 0 30px;
+
+  img{
+    width: 25px;
+    height: 25px;
+  }
+  span{
+    font-size: 24px;
+    margin-left: 10px;
+    a {
+      color: white;
+    }
+  }
+}

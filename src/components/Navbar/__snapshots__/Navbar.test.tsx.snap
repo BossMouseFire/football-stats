@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar renders correctly 1`] = `
+<div
+  className="navbar"
+>
+  <img
+    alt="ball"
+    src="soccer-ball.svg"
+  />
+  <span>
+    <a
+      href="/"
+      id="link-main-page"
+    >
+      FootSTAT
+    </a>
+  </span>
+</div>
+`;

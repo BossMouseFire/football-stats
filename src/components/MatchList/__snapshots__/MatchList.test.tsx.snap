@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Match renders correctly 1`] = `
+<div
+  className="match"
+>
+  <div
+    className="status"
+  >
+    Завершено
+  </div>
+  <div
+    className="date"
+  >
+    11.08.2023
+  </div>
+  <div
+    className="team"
+  >
+    <span>
+      UD Almería
+    </span>
+    <img
+      alt="UD Almería"
+      src="https://crests.football-data.org/267.png"
+    />
+  </div>
+  <div
+    className="score"
+  >
+    <div>
+      0
+    </div>
+    :
+    <div>
+      2
+    </div>
+  </div>
+  <div
+    className="team winnerTeam"
+  >
+    <span>
+      Rayo Vallecano de Madrid
+    </span>
+    <img
+      alt="Rayo Vallecano de Madrid"
+      src="https://crests.football-data.org/87.svg"
+    />
+  </div>
+</div>
+`;
