@@ -4,8 +4,11 @@ import { getDate } from '../../utils/date';
 import styles from './MatchList.module.scss';
 import clsx from 'clsx';
 import { Winner } from '../../dto/ScoreDto';
+import { useNavigate } from 'react-router-dom';
 
 export const Match: React.FC<MatchProps> = ({ match, className }) => {
+    const navigate = useNavigate();
+
     const dateMatch = useMemo(() => {
         return getDate(match.utcDate);
     }, [match.utcDate]);
@@ -28,7 +31,9 @@ export const Match: React.FC<MatchProps> = ({ match, className }) => {
                     isWinnerHomeTeam && styles.winnerTeam,
                 )}
             >
-                <span>{match.homeTeam.name}</span>
+                <span onClick={() => navigate(`/team/${match.homeTeam.id}`)}>
+                    {match.homeTeam.name}
+                </span>
                 <img src={match.homeTeam.crest} alt={match.homeTeam.name} />
             </div>
             <div className={styles.score}>
@@ -46,7 +51,9 @@ export const Match: React.FC<MatchProps> = ({ match, className }) => {
                     isWinnerAwayTeam && styles.winnerTeam,
                 )}
             >
-                <span>{match.awayTeam.name}</span>
+                <span onClick={() => navigate(`/team/${match.awayTeam.id}`)}>
+                    {match.awayTeam.name}
+                </span>
                 <img src={match.awayTeam.crest} alt={match.awayTeam.name} />
             </div>
         </div>

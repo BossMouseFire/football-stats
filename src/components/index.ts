@@ -7,3 +7,4 @@ export { LeagueInfo } from './LeagueInfo/LeagueInfo';
 export { CompetitionTabs } from './CompetitionTabs/CompetitionTabs';
 export { TablesStandings } from './TablesStandings/TablesStandings';
 export { TeamList } from './TeamList/TeamList';
+export { TeamInfo } from './TeamInfo/TeamInfo';

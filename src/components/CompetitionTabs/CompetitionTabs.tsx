@@ -6,7 +6,7 @@ import { TablesStandings } from '../TablesStandings/TablesStandings';
 
 import styles from './CompetitionTabs.module.scss';
 import { TeamList } from '../TeamList/TeamList';
-import { MatchesCompetition } from '../MatchesCompetition/MatchesCompetition';
+import { MatchesListBlock } from '../MatchesListBlock/MatchesListBlock';
 import { RangeValue } from '../MatchList/MatchListProps';
 import { useAppDispatch } from '../../hooks/useAppSelector';
 import { setRange } from '../../store/competition/competitionCreator';
@@ -45,7 +45,7 @@ export const CompetitionTabs = () => {
             key: '3',
             label: 'Матчи лиги',
             children: (
-                <MatchesCompetition
+                <MatchesListBlock
                     matches={matches}
                     error={errorCompetitionMatches}
                     dateTo={dateTo}
@@ -68,6 +68,8 @@ export const CompetitionTabs = () => {
     function getRangeMatches(dates: RangeValue) {
         if (dates) {
             dispatch(setRange({ dateFrom: dates[0], dateTo: dates[1] }));
+        } else {
+            dispatch(setRange({ dateFrom: null, dateTo: null }));
         }
     }
 };

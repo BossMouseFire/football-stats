@@ -1,4 +1,6 @@
 import { TeamDto } from '../dto/TeamDto';
+import { Coach } from './Coach';
+import { Player } from './Player';
 
 export class Team {
     id: number;
@@ -11,6 +13,8 @@ export class Team {
     founded: number | null;
     clubColors: string | null;
     venue: string | null;
+    coach?: Coach;
+    squad?: Player[];
 
     constructor(dto: TeamDto) {
         this.id = dto.id;
@@ -23,5 +27,13 @@ export class Team {
         this.founded = dto.founded;
         this.clubColors = dto.clubColors;
         this.venue = dto.venue;
+
+        if (dto.coach) {
+            this.coach = new Coach(dto.coach);
+        }
+
+        if (dto.squad) {
+            this.squad = dto.squad.map((item) => new Player(item));
+        }
     }
 }

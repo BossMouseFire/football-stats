@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CompetitionCardProps } from './CompetitionCardProps';
 import styles from './CompetitionCard.module.scss';
-import { getDateToString } from '../../utils/date';
 import { dateCompetition } from '../../utils/dateCompetition';
 
 export const CompetitionCard: React.FC<CompetitionCardProps> = ({
