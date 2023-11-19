@@ -92,15 +92,15 @@ export const setRange = createAsyncThunk(
 
         const competition = state.competitionReducer.competition;
 
-        if (competition && dateTo && dateFrom) {
+        if (competition) {
             const id = String(competition.id);
             const season = state.competitionReducer.season;
             dispatch(
                 fetchCompetitionMatches({
                     id,
                     season,
-                    dateFrom: dateFrom.format('YYYY-MM-DD'),
-                    dateTo: dateTo.format('YYYY-MM-DD'),
+                    dateFrom: dateFrom?.format('YYYY-MM-DD'),
+                    dateTo: dateTo?.format('YYYY-MM-DD'),
                 }),
             );
         }

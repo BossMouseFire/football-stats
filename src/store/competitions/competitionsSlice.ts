@@ -38,13 +38,17 @@ export const competitionsSlice = createSlice({
     extraReducers: {
         [fetchCompetitions.pending.type]: (state) => {
             state.isLoading = true;
+            state.error = undefined;
         },
         [fetchCompetitions.fulfilled.type]: (
             state,
             action: PayloadAction<Competition[]>,
         ) => {
-            state.competitions = action.payload;
-            state.filterCompetitions = action.payload;
+            const filteredCompetitions = action.payload.filter(
+                (item) => item.type === 'LEAGUE',
+            );
+            state.competitions = filteredCompetitions;
+            state.filterCompetitions = filteredCompetitions;
         },
         [fetchCompetitions.rejected.type]: (
             state,

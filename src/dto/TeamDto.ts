@@ -1,3 +1,6 @@
+import { CoachDTO } from './CoachDTO';
+import { PlayerDTO } from './PlayerDTO';
+
 export interface TeamDto {
     id: number;
     name: string | null;
@@ -9,4 +12,6 @@ export interface TeamDto {
     founded: number | null;
     clubColors: string | null;
     venue: string | null;
+    coach?: CoachDTO;
+    squad?: PlayerDTO[];
 }

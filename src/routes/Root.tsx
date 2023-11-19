@@ -10,6 +10,8 @@ const CompetitionsPage = lazy(
 
 const CompetitionPage = lazy(() => import('../pages/Competition/Competition'));
 
+const TeamPage = lazy(() => import('../pages/Team/Team'));
+
 export const Root = () => (
     <Suspense fallback={<Spin />}>
         <Routes>
@@ -19,6 +21,7 @@ export const Root = () => (
                     path={routes.competition}
                     element={<CompetitionPage />}
                 />
+                <Route path={routes.team} element={<TeamPage />} />
             </Route>
             <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>

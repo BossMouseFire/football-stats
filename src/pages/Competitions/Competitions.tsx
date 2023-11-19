@@ -21,9 +21,6 @@ const CompetitionsPage = () => {
         dispatch(fetchCompetitions());
     }, []);
 
-    if (error) {
-        return <ErrorBlock error={error} />;
-    }
     return (
         <div className={styles.pageLeagues}>
             <div className={styles.aboutSite}>
@@ -35,11 +32,12 @@ const CompetitionsPage = () => {
                 <div className={styles.searchBlock}>
                     <SearchCompetition />
                 </div>
-                {isLoading && <Spin />}
-                {!filterCompetitions.length && (
+                {error && <ErrorBlock error={error} />}
+                {!error && isLoading && <Spin />}
+                {!error && !filterCompetitions.length && (
                     <div className={styles.empty}>Ничего не найдено</div>
                 )}
-                {filterCompetitions.length && (
+                {!error && filterCompetitions.length && (
                     <CompetitionList competitionList={filterCompetitions} />
                 )}
             </div>
